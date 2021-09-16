@@ -1,0 +1,35 @@
+{
+  "name": "mern_todo",
+  "version": "1.0.0",
+  "description": "V0L40K's ToDo app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "server": "nodemon app.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/V0L40K21/mern_todo.git"
+  },
+  "author": "V0L40K <vol4ok94@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/V0L40K21/mern_todo/issues"
+  },
+  "homepage": "https://github.com/V0L40K21/mern_todo#readme",
+  "dependencies": {
+    "axios": "^0.21.4",
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.6",
+    "express": "^4.17.1",
+    "express-validator": "^6.12.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.6"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.1",
+    "nodemon": "^2.0.12"
+  }
+}
