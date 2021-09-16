@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 
 import {loginRequest, registerRequest} from '../redux/actions/userAction'
+import Materialize from 'materialize-css'
 
-const AuthPage = ({registerRequest, loginRequest}) => {
+const AuthPage = ({registerRequest, loginRequest, message, loading}) => {
   const [form, setForm,] = useState({email: '', password: ''});
   const changeHandler = (e) => {
     setForm({...form, [e.target.name]: e.target.value})
@@ -14,6 +15,11 @@ const AuthPage = ({registerRequest, loginRequest}) => {
   const authHandler = () => {
     loginRequest({...form})
   }
+  useEffect(() => {
+    if (message.trim()) {
+      Materialize.toast({html: `${message}`});
+    }
+  }, [message])
   return (
     <div className={'row'}>
       <div className="col s6 offset-s3">
@@ -47,8 +53,8 @@ const AuthPage = ({registerRequest, loginRequest}) => {
             </form>
           </div>
           <div className="card-action">
-            <button className={'btn yellow darken-4'} onClick={authHandler} style={{marginRight: 10}}>Войти</button>
-            <button className={'btn grey lighten-1 black-text'} onClick={registerHandler}>Регистрация</button>
+            <button className={'btn yellow darken-4'} onClick={authHandler} style={{marginRight: 10}} disabled={loading}>Войти</button>
+            <button className={'btn grey lighten-1 black-text'} onClick={registerHandler} disabled={loading}>Регистрация</button>
           </div>
         </div>
       </div>
@@ -56,4 +62,9 @@ const AuthPage = ({registerRequest, loginRequest}) => {
   )
 }
 
-export default connect(null, {registerRequest, loginRequest})(AuthPage)
+const mapStateToProps = (state) => ({
+  message: state.user.message,
+  loading: state.user.loading,
+})
+
+export default connect(mapStateToProps, {registerRequest, loginRequest})(AuthPage)

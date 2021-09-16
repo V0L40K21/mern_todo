@@ -4,6 +4,7 @@ const initialState = {
   loading: false,
   id: null,
   token: null,
+  isAuth: false,
   message: ''
 }
 
@@ -22,6 +23,7 @@ export const userReducer = (state = initialState, action) => {
         loading: false,
         id: payload.userId,
         token: payload.token,
+        isAuth: true,
         message: '',
       }
     }
@@ -30,6 +32,15 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         message: payload.message,
+      }
+    }
+    case types.LOGIN.LOGOUT: {
+      return {
+        ...state,
+        loading: false,
+        id: null,
+        token: null,
+        isAuth: false,
       }
     }
     case types.REGISTER.REQUEST: {

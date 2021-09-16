@@ -1,17 +1,22 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
 import 'materialize-css'
 
 import {useRoutes} from './routes'
 
-const App = () => {
+const App = ({isAuth}) => {
   return (
     <BrowserRouter>
       <div className={'container'}>
-        {useRoutes(false)}
+        {useRoutes(isAuth)}
       </div>
     </BrowserRouter>
   )
 }
 
-export default App
+const mapStateToProps = (state) => ({
+  isAuth: state.user.isAuth,
+})
+
+export default connect(mapStateToProps)(App)

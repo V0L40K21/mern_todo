@@ -3,6 +3,7 @@ export const types = {
     REQUEST: 'LOGIN_REQUEST',
     SUCCESS: 'LOGIN_SUCCESS',
     FAILURE: 'LOGIN_FAILURE',
+    LOGOUT: 'LOGIN_LOGOUT',
   },
   REGISTER: {
     REQUEST: 'REGISTER_REQUEST',
@@ -26,6 +27,12 @@ export const loginSuccess = (data) => {
 export const loginFailure = (data) => {
   return {
     type: types.LOGIN.FAILURE,
+    payload: data
+  }
+}
+export const loginLogout = (data) => {
+  return {
+    type: types.LOGIN.LOGOUT,
     payload: data
   }
 }

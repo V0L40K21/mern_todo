@@ -1,6 +1,14 @@
 import {takeLatest, call, put} from 'redux-saga/effects';
 
-import {loginFailure, loginSuccess, registerFailure, registerSuccess, types} from '../actions/userAction'
+import {
+  loginFailure,
+  loginLogout,
+  loginRequest,
+  loginSuccess,
+  registerFailure,
+  registerSuccess,
+  types
+} from '../actions/userAction'
 import {ENDPOINT_AUTH, ENDPOINT_REGISTER} from '../../constants/url'
 import api from '../../helpers/api'
 
@@ -12,6 +20,7 @@ function* loginSaga({payload}) {
     yield put(loginSuccess({...data}));
   } else {
     yield put(loginFailure({...data}));
+    yield put(loginLogout())
   }
 }
 
@@ -21,6 +30,7 @@ function* registerSaga({payload}) {
   const {data, status} = response;
   if (status === 201) {
     yield put(registerSuccess({...data}));
+    yield put(loginRequest({...payload}));
   } else {
     yield put(registerFailure({...data}));
   }
