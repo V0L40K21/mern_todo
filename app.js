@@ -1,11 +1,36 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const cors = require('cors');
+const bodyParser = require("body-parser")
 require('dotenv').config()
 
 const app = express();
 
+app.use(cors());
+
+app.use(function (req, res, next) {
+  var origins = [
+    'http://127.0.0.1:3000',
+    'https://vol4ok.herokuapp.com'
+  ];
+
+  for(var i = 0; i < origins.length; i++){
+    var origin = origins[i];
+
+    if(req.headers.origin.indexOf(origin) > -1){
+      res.header('Access-Control-Allow-Origin', req.headers.origin);
+    }
+  }
+
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use('/api/auth', require('./routes/auth.routes'))
 
 if (process.env.NODE_ENV === "production") {
