@@ -16,7 +16,7 @@ const AuthPage = ({registerRequest, loginRequest, message, loading}) => {
     loginRequest({...form})
   }
   useEffect(() => {
-    if (message.trim()) {
+    if (!!message) {
       Materialize.toast({html: `${message}`});
     }
   }, [message])
