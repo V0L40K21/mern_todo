@@ -10,19 +10,15 @@ const app = express();
 app.use(cors());
 
 app.use(function (req, res, next) {
-  var origins = [
+  const origins = [
     'http://127.0.0.1:3000',
     'https://vol4ok.herokuapp.com'
   ];
-
-  for(var i = 0; i < origins.length; i++){
-    var origin = origins[i];
-
-    if(req.headers.origin.indexOf(origin) > -1){
+  for(let i = 0; i < origins.length; i++){
+    if(req.headers.origin?.indexOf(origins[i]) > -1){
       res.header('Access-Control-Allow-Origin', req.headers.origin);
     }
   }
-
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
