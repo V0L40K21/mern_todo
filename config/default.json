@@ -1,0 +1,5 @@
+{
+  "port": 5000,
+  "jwtSecret": "subaru",
+  "mongoUri": "mongodb+srv://Admin:admin@cluster0.mhyaz.mongodb.net/todoDb?retryWrites=true&w=majority"
+}
