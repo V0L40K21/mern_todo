@@ -1,11 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 require('dotenv').config()
 
 const app = express();
 
 app.use(express.json())
 app.use('/api/auth', require('./routes/auth.routes'))
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "build", "index.html"));
+  });
+}
 
 const start = async () => {
   try {
