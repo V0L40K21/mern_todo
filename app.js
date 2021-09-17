@@ -28,6 +28,7 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/api/auth', require('./routes/auth.routes'))
+app.use('/api/todos', require('./routes/todos.routes'))
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.resolve(__dirname, "./client/build")));

@@ -14,7 +14,6 @@ import api from '../../helpers/api'
 
 function* loginSaga({payload}) {
   const response = yield call(api, ENDPOINT_AUTH, 'POST', {...payload});
-  console.log(response.data);
   const {data, status} = response;
   if (status === 200) {
     yield put(loginSuccess({...data}));
@@ -26,7 +25,6 @@ function* loginSaga({payload}) {
 
 function* registerSaga({payload}) {
   const response = yield call(api, ENDPOINT_REGISTER, 'POST', {...payload});
-  console.log(response);
   const {data, status} = response;
   if (status === 201) {
     yield put(registerSuccess({...data}));
