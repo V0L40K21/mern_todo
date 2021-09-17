@@ -1,15 +1,15 @@
 import React from 'react'
-import {connect} from 'react-redux'
 
-import {loginLogout} from '../redux/actions/userAction'
+import TodoForm from '../components/todos/TodoForm'
+import TodoList from '../components/todos/TodoList'
 
-const ToDosPage = ({loginLogout}) => {
-  return(
-    <div>
-      <h1>ToDo's page</h1>
-      <button onClick={() => loginLogout()}>Выйти</button>
-    </div>
+const ToDosPage = () => {
+  return (
+    <>
+      <TodoForm/>
+      <TodoList/>
+    </>
   )
 }
 
-export default connect(null, {loginLogout})(ToDosPage)
+export default ToDosPage
